@@ -1,4 +1,4 @@
-GoUploadServer
+mediaRepository
 ==============
 
 Upload server writed in Golang.
@@ -13,5 +13,3 @@ ENVIRONMENT
 ===========
 
 Now, it's a big mess. I try to organized correctly the sources.... 
-
-
