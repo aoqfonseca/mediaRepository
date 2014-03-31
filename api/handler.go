@@ -1,14 +1,12 @@
-package api 
+package api
 
 import (
-    "log"
     "fmt"
     "net/http"
     "io/ioutil"
 )
 
 func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
-    log.Println
     file, handler, err := req.FormFile("file")
     if err != nil {
         fmt.Println(err)
@@ -17,7 +15,8 @@ func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
     if err != nil {
             fmt.Println(err)
     }
-    err = ioutil.WriteFile(handler.Filename, data, 0777)
+    var path_file = "/tmp/teste/"+ handler.Filename
+    err = ioutil.WriteFile(path_file, data, 0777)
     if err != nil {
         fmt.Println(err)
     }
