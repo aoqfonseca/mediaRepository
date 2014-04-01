@@ -1,15 +1,15 @@
 package api
 
 import (
-    "bytes"
+	"bytes"
 	"io"
 	"io/ioutil"
 	"launchpad.net/gocheck"
-    "mime/multipart"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
-    "os"
-    "path/filepath"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -32,37 +32,37 @@ func get(url string, b io.Reader, c *gocheck.C) (*httptest.ResponseRecorder, *ht
 	return request("GET", url, b, c)
 }
 
-func newRequestFormFile(url string, params map[string]string, paramName, path string)(*httptest.ResponseRecorder, *http.Request, error){
-    file, err := os.Open(path)
-    if err != nil{
-        return nil, nil, err
-    }
+func newRequestFormFile(url string, params map[string]string, paramName, path string) (*httptest.ResponseRecorder, *http.Request, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, nil, err
+	}
 
-    defer file.Close()
+	defer file.Close()
 
-    body := &bytes.Buffer{}
-    writer := multipart.NewWriter(body)
-    part, err := writer.CreateFormFile(paramName, filepath.Base(path))
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	part, err := writer.CreateFormFile(paramName, filepath.Base(path))
 
-    if err != nil{
-        return nil, nil, err
-    }
+	if err != nil {
+		return nil, nil, err
+	}
 
-    _, err = io.Copy(part, file)
+	_, err = io.Copy(part, file)
 
-    for key, val :=range params {
-        _ = writer.WriteField(key, val)
-    }
-    err = writer.Close()
+	for key, val := range params {
+		_ = writer.WriteField(key, val)
+	}
+	err = writer.Close()
 
-    if err != nil {
-        return nil, nil, err
-    }
+	if err != nil {
+		return nil, nil, err
+	}
 
 	recorder := httptest.NewRecorder()
-    request, err  := http.NewRequest("POST", url, body)
-    request.Header.Set("Content-Type", writer.FormDataContentType())
-    return recorder, request, err
+	request, err := http.NewRequest("POST", url, body)
+	request.Header.Set("Content-Type", writer.FormDataContentType())
+	return recorder, request, err
 }
 
 func (s *S) TestHealthCheck(c *gocheck.C) {
@@ -75,11 +75,11 @@ func (s *S) TestHealthCheck(c *gocheck.C) {
 }
 
 func (s *S) TestUploadFile(c *gocheck.C) {
-    recorder, request, err := newRequestFormFile("/upload", nil, "file", "../fixtures/teste.jpg")
-    c.Assert(err, gocheck.IsNil)
-    UploadFileHandler(recorder, request)
+	recorder, request, err := newRequestFormFile("/upload", nil, "file", "../fixtures/teste.jpg")
+	c.Assert(err, gocheck.IsNil)
+	UploadFileHandler(recorder, request)
 	body, err := ioutil.ReadAll(recorder.Body)
 
-    c.Assert(err, gocheck.IsNil)
+	c.Assert(err, gocheck.IsNil)
 	c.Assert(string(body), gocheck.Equals, "SUCCESS")
 }
