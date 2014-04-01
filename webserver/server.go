@@ -1,7 +1,9 @@
 package main
 
 import (
+    "flag"
 	"github.com/gorilla/pat"
+    "github.com/tsuru/config"
 	"github.com/mediaRepository/api"
 	"log"
 	"net/http"
@@ -9,6 +11,16 @@ import (
 )
 
 func main() {
+
+    configFile := flag.String("config", "/etc/config.yml", "Media Repository Path Config file")
+    port        := flag.String("port", ":4321", "Listening por. Example: :4321")
+    flag.Parse()
+
+
+    err := config.ReadAndWatchConfigFile(*configFile)
+    if err !=nil{
+        fmt.Println("Could not find config file")
+    }
 
 	r := pat.New()
 
@@ -21,5 +33,6 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	log.Println("Server listening on 4321")
-	http.ListenAndServe(":4321", r)
+	http.ListenAndServe(port, r)
+
 }

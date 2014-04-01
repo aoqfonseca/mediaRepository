@@ -2,11 +2,13 @@ package api
 
 import (
 	"fmt"
+    "github.com/tsuru/config"
 	"io/ioutil"
 	"net/http"
 )
 
 func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
+    pathToSave = config.Get("photo_storage_path")
 	file, handler, err := req.FormFile("file")
 	if err != nil {
 		fmt.Println(err)
@@ -15,7 +17,7 @@ func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	var path_file = "/tmp/teste/" + handler.Filename
+	var path_file = pathToSave + handler.Filename
 	err = ioutil.WriteFile(path_file, data, 0777)
 	if err != nil {
 		fmt.Println(err)
