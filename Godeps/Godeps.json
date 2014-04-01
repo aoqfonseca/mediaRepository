@@ -9,6 +9,10 @@
 			"ImportPath": "github.com/gorilla/context",
 			"Rev": "1be7a086a5fd6440ef16fe96baeda0c78282b980"
 		},
+        {
+			"ImportPath": "github.com/tsuru/config",
+			"Rev": "97d4a7511ea73e02a62a1a381d17110b5372cc40"
+		},
 		{
 			"ImportPath": "github.com/gorilla/mux",
 			"Rev": "9ede152210fa25c1377d33e867cb828c19316445"
