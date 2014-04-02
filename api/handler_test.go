@@ -2,6 +2,8 @@ package api
 
 import (
 	"bytes"
+	"fmt"
+	"github.com/tsuru/config"
 	"io"
 	"io/ioutil"
 	"launchpad.net/gocheck"
@@ -63,6 +65,14 @@ func newRequestFormFile(url string, params map[string]string, paramName, path st
 	request, err := http.NewRequest("POST", url, body)
 	request.Header.Set("Content-Type", writer.FormDataContentType())
 	return recorder, request, err
+}
+
+func (s *S) SetUpSuite(c *gocheck.C) {
+	//Loading config.yml for testing
+	err := config.ReadAndWatchConfigFile("../config.yml")
+	if err != nil {
+		fmt.Println("Erro loading config file")
+	}
 }
 
 func (s *S) TestHealthCheck(c *gocheck.C) {

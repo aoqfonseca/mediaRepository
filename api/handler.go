@@ -8,7 +8,11 @@ import (
 )
 
 func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
-    pathToSave = config.Get("photo_storage_path")
+    var pathToSave, err = config.GetString("photo_storage_path")
+    if err != nil{
+        fmt.Println(err)
+    }
+
 	file, handler, err := req.FormFile("file")
 	if err != nil {
 		fmt.Println(err)
