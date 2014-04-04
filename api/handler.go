@@ -8,6 +8,11 @@ import (
     "time"
 )
 
+const (
+	IMAGE_TYPES       = "image/(gif|p?jpeg|(x-)?png)"
+	VIDEO_TYPES       = "(video|realmedia)"
+)
+
 func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
     var pathToSave, err = config.GetString("photo_storage_path")
     now := time.Now()
