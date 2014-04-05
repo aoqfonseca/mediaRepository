@@ -54,3 +54,36 @@ This will create runable file called server. To run:
     $ ./server --config config.yml
 
 Voilá, your serving is up and runing
+
+
+##Benchmark
+
+
+    $ Server Software:        
+    $ Server Hostname:        localhost
+    $ Server Port:            4321
+    $ 
+    $ Document Path:          /upload
+    $ Document Length:        7 bytes
+    $   
+    $ Concurrency Level:      450
+    $ Time taken for tests:   31.300 seconds
+    $ Complete requests:      50000
+    $ Failed requests:        0
+    $ Write errors:           0
+    $ Total transferred:      7100000 bytes
+    $ Total body sent:        1265100000
+    $ HTML transferred:       350000 bytes
+    $ Requests per second:    1597.47 [#/sec] (mean)
+    $ Time per request:       281.696 [ms] (mean)
+    $ Time per request:       0.626 [ms] (mean, across all concurrent requests)
+    $ Transfer rate:          221.52 [Kbytes/sec] received
+    $                         39471.80 kb/s sent
+    $                         39693.33 kb/s total
+    $ 
+    $ Connection Times (ms)
+    $               min  mean[+/-sd] median   max
+    $ Connect:        0  103 446.2      0    7016
+    $ Processing:     1  173 175.4    142    3321
+    $ Waiting:        1  172 175.0    141    3321
+    $ Total:          1  277 479.2    150    7430

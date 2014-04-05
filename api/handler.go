@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
     "github.com/tsuru/config"
+    "github.com/nu7hatch/gouuid"
 	"io/ioutil"
     "net/http"
     "time"
@@ -19,7 +20,7 @@ func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
     var directory = mountDirectoryPathFromTime(now)
     check(err)
 
-	file, handler, err := req.FormFile("file")
+	file, _, err := req.FormFile("file")
 	check(err)
 	
 	data, err := ioutil.ReadAll(file)
@@ -28,8 +29,10 @@ func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
     directory = pathToSave + directory
 	err = CreateDir(directory)
 	check(err)
+
+	base, _ := uuid.NewV4()
 	
-	var path_file = directory +  handler.Filename
+	var path_file = directory + base.String()
 	err = ioutil.WriteFile(path_file, data, 0777)
 	check(err)
 	

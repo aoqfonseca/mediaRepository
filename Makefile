@@ -1,11 +1,8 @@
 SRC = $(GOPATH)/src
 GITHUBCOM = $(GOPATH)/src/github.com
 
-setup:
-	@go build .
-
 run: build
-	@shell server --config config.yml 
+	@./server --config config.yml 
 
 test:
 	@go test -i ./...
@@ -27,3 +24,4 @@ setup: check
 
 build:
 	@go build webserver/server.go
+	@chmod a+x server
