@@ -1,9 +1,7 @@
 ##mediaRepository
-==============
 The mediaRepository is a server write in Go for upload file. I use this for learning Go.
 
 ##Contribuing
-=============
 
 This tool assumes you are working in a standard Go workspace,
 as described in http://golang.org/doc/code.html. We require Go 1.1
