@@ -39,7 +39,7 @@ When it's finished:
 
 ### MAKE SETUP
 
-All steps showed bellow, you can do calling:
+All steps showed above, you can do calling:
 
     $ make setup
 
