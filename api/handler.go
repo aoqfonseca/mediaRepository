@@ -4,7 +4,7 @@ import (
 	"fmt"
     "github.com/tsuru/config"
 	"io/ioutil"
-	"net/http"
+    "net/http"
     "time"
 )
 
@@ -16,23 +16,23 @@ const (
 func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
     var pathToSave, err = config.GetString("photo_storage_path")
     now := time.Now()
-    if err != nil{
-        fmt.Println(err)
-    }
+    var directory = mountDirectoryPathFromTime(now)
+    check(err)
 
 	file, handler, err := req.FormFile("file")
-	if err != nil {
-		fmt.Println(err)
-	}
+	check(err)
+	
 	data, err := ioutil.ReadAll(file)
-	if err != nil {
-		fmt.Println(err)
-	}
-	var path_file = pathToSave + mountDirectoryPathFromTime(now) +  handler.Filename
+	check(err)
+	
+    directory = pathToSave + directory
+	err = CreateDir(directory)
+	check(err)
+	
+	var path_file = directory +  handler.Filename
 	err = ioutil.WriteFile(path_file, data, 0777)
-	if err != nil {
-		fmt.Println(err)
-	}
+	check(err)
+	
 	fmt.Fprintf(w, "SUCCESS")
 }
 

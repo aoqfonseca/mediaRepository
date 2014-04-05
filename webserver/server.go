@@ -1,13 +1,14 @@
 package main
 
 import (
-    "flag"
-	"github.com/gorilla/pat"
-    "github.com/tsuru/config"
-	"github.com/mediaRepository/api"
-	"log"
-	"net/http"
-	"runtime"
+        "fmt"
+        "flag"
+        "github.com/gorilla/pat"
+        "github.com/tsuru/config"
+        "github.com/mediaRepository/api"
+        "log"
+        "net/http"
+        "runtime"
 )
 
 func main() {
@@ -33,6 +34,6 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	log.Println("Server listening on 4321")
-	http.ListenAndServe(port, r)
+	http.ListenAndServe(*port, r)
 
 }
