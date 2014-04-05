@@ -37,6 +37,12 @@ When it's finished:
 
     $go test ./...
 
+### MAKE SETUP
+
+All steps showed bellow, you can do calling:
+
+    $ make setup
+
 ### Build
 
 In your root project dir, run this command:
