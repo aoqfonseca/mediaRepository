@@ -5,12 +5,22 @@ The mediaRepository is a server write in Go for upload file. I use this for lear
 
 This tool assumes you are working in a standard Go workspace,
 as described in http://golang.org/doc/code.html. We require Go 1.1
-or newer to build godep itself, but you can use it on any project
+or newer to build this itself, but you can use it on any project
 that works with Go 1 or newer.
+
+
+##GIT Config
+
+. Please, use rebase for pull and merge.
+
+    $ git pull -rebase origin master
+
+. When you finish some feature, put, in commit message, ISSUE NUMBER associate with it.
+
 
 ###Configuring GOPATH
 
-In your bash, export environment variable to define GOPATH. This path will be the local whre Go put all libs, bin, etc. 
+In your bash, export environment variable to define GOPATH. This path will be the local whre Go put all libs, bin, etc.
 
     $ EXPORT GOPATH=$HOME/.go
 
@@ -25,7 +35,7 @@ Create a symbol link in $GOPATH/src for your project.
     $ cd $GOPATH/src
     $ mkdir -p github.com
     $ cd github.com
-    $ ln -s $HOME/Project/mediaRepository mediaRepository  
+    $ ln -s $HOME/Project/mediaRepository mediaRepository
 
 ### Install Deps and run testing
 
@@ -59,13 +69,13 @@ Voilá, your serving is up and runing
 ##Benchmark
 
 
-    $ Server Software:        
+    $ Server Software:
     $ Server Hostname:        localhost
     $ Server Port:            4321
-    $ 
+    $
     $ Document Path:          /upload
     $ Document Length:        7 bytes
-    $   
+    $
     $ Concurrency Level:      450
     $ Time taken for tests:   31.300 seconds
     $ Complete requests:      50000
@@ -80,7 +90,7 @@ Voilá, your serving is up and runing
     $ Transfer rate:          221.52 [Kbytes/sec] received
     $                         39471.80 kb/s sent
     $                         39693.33 kb/s total
-    $ 
+    $
     $ Connection Times (ms)
     $               min  mean[+/-sd] median   max
     $ Connect:        0  103 446.2      0    7016
