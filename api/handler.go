@@ -22,20 +22,20 @@ func UploadFileHandler(w http.ResponseWriter, req *http.Request) {
 
 	file, _, err := req.FormFile("file")
 	check(err)
-	
+
 	data, err := ioutil.ReadAll(file)
 	check(err)
-	
+
     directory = pathToSave + directory
 	err = CreateDir(directory)
 	check(err)
 
 	base, _ := uuid.NewV4()
-	
+
 	var path_file = directory + base.String()
 	err = ioutil.WriteFile(path_file, data, 0777)
 	check(err)
-	
+
 	fmt.Fprintf(w, "SUCCESS")
 }
 
