@@ -20,7 +20,6 @@ func (s *S) TestCreateDir(c *gocheck.C){
 
     c.Assert(err, gocheck.IsNil)
     c.Assert(finfo.IsDir(), gocheck.Equals, true)
-    c.Assert(finfo.Mode().String(), gocheck.Equals, "drwxr-xr-x")
 
     os.RemoveAll("tmp/test")
 }
