@@ -4,6 +4,7 @@ GITHUBCOM = $(GOPATH)/src/github.com
 run: build
 	@./server --config config.yml 
 
+.PHONY: test
 test:
 	@go test -i ./...
 	@go test ./...
